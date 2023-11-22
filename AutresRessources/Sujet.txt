@@ -1,0 +1,15 @@
+Construire le site web "Ah ! Ma Zone !" en utilisant le framework Symfony. Ce site web est un système de vente en ligne de produits informatiques.
+
+- Les clients sont identifiés par leur nom, prénom, email, mot de passe, adresse, code postal et ville.
+- Les produits comprennent un libellé, un prix unitaire TTC, quantité en stock.
+-  Les commandes comprennent un libellé, un prix unitaire TTC, un client et la liste des articles commandés avec pour chacun la quantité.
+
+Mettre en oeuvre 
+- L'enregistrement d'un nouveau client
+- La connexion au site pour un client 
+- Le fait de constituer et valider une commande
+- L'affichage des clients et pour chaque client, la liste de ses commandes et des produits commandés
+
+On pourra préremplir la base de données avec des données initiales.
+
+Le rendu du projet aura lieu le mercredi 10 janvier 2024 de 9h à 12h avec démonstration des foncionnalités demandées. Vous pouvez vous constituer en groupe de 2, 3 ou 4 étudiants.
