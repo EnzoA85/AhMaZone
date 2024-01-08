@@ -1,15 +1,38 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="example-wrapper">
+        <div class="card-group" id="slick-carousel">
+            {% for produit in listeProduit %}
+                <div class="cardProduit">
+                    <div class="card-body">
+                        <div style="text-align:center;">
+                            <center><img src="{{ asset('images/produits/' ~ produit.img) }}" alt="{{ produit.libelle }}" width="250" height="200"></center>
+                            <h5 class="card-title">{{ produit.libelle }}</h5>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
-<div class="example-wrapper">
-    
+    <script>
+        // Initialiser le diaporama avec Slick Carousel
+        $(document).ready(function(){
+            $('#slick-carousel').slick({
+                infinite: true,
+                slidesToShow: 5,  // Ajustez le nombre de produits affichés à la fois selon vos besoins
+                slidesToScroll: 2,
+                autoplay: true,
+                autoplaySpeed: 2000  // Ajustez la vitesse du diaporama selon vos besoins
+            });
+        });
+    </script>
 
-</div>
+	<style>
+		.cardProduit {
+			margin: 10px;
+			background-color:lightgrey;
+		}
+	</style>
 {% endblock %}
