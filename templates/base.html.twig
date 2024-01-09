@@ -31,6 +31,7 @@
 						</button>
 					</form>
 				</ul>
+				{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
 				<ul class="navbar-nav mb-2 mb-lg-0">
 					<li class="nav-item">
 						<a class="nav-link active" aria-current="page" href="{{path('app_register')}}">Inscription</a>
@@ -39,6 +40,14 @@
 						<a class="nav-link active" aria-current="page" href="{{path('app_login')}}">Connexion</a>
 					</li>
 				</ul>
+				{% endif %}
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<ul class="navbar-nav mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Deconnexion</a>
+					</li>
+				</ul>
+				{% endif %}
 			</div>
 		</div>
 	</nav>
