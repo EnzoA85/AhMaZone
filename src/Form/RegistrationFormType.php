@@ -20,7 +20,7 @@ class RegistrationFormType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('adresse')
-            ->add('cp')
+            ->add('codePostal')
             ->add('ville')
             ->add('email')
             ->add('plainPassword', PasswordType::class, [
