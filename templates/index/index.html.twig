@@ -7,7 +7,8 @@
                 <div class="cardProduit">
                     <div class="card-body">
                         <div style="text-align:center;">
-                            <center><img src="{{ asset('images/produits/' ~ produit.img) }}" alt="{{ produit.libelle }}" width="250" height="200"></center>
+                            <center><img src="{{ asset('images/produits/' ~ produit.img) }}" alt="{{ produit.libelle }}" width="250" height="200">
+                            <a href="{{path('app_produits',{id : produit.id})}}" class="btn btn-primary" style="position: absolute;bottom:0;margin-bottom:20px;">Plus d'infos</a></center>
                             <h5 class="card-title">{{ produit.libelle }}</h5>
                         </div>
                     </div>

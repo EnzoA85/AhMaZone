@@ -17,8 +17,8 @@ class IndexController extends AbstractController
         $produits = $produitsRepository->findAll();
         $listeProduit = [];
         foreach ($produits as $produit ){
-            $listeProduit[] = array("libelle" => $produit->getLibelle(),"prix"=>$produit->getPrixUnitaireTTC(),"quantite"=>$produit->getQuatiteStock(),"img"=>$produit->getImg());
-        }     
+            $listeProduit[] = array("id"=>$produit->getID(),"libelle" => $produit->getLibelle(),"description"=>$produit->getDescription(),"caracteristique"=>$produit->getCaracteristique(),"prix"=>$produit->getPrixUnitaireTTC(),"quantite"=>$produit->getQuatiteStock(),"img"=>$produit->getImg());
+        }
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController','listeProduit' => $listeProduit,
         ]);

@@ -16,6 +16,12 @@ class Produits
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $caracteristique = null;
+
     #[ORM\Column(name: "prixUnitaireTTC")]
     private ?float $prixUnitaireTTC = null;
 
@@ -38,6 +44,30 @@ class Produits
     public function setLibelle(string $libelle): static
     {
         $this->libelle = $libelle;
+
+        return $this;
+    }
+
+    public function getCaracteristique(): ?string
+    {
+        return $this->caracteristique;
+    }
+
+    public function setCaracteristique(string $caracteristique): static
+    {
+        $this->caracteristique = $caracteristique;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }
