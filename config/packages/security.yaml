@@ -20,7 +20,7 @@ security:
             # Configurer le chemin de déconnexion
             logout:
                 path: app_logout  # Choisissez un chemin approprié
-                target: /index          # Choisissez une URL vers laquelle rediriger après la déconnexion
+                target: /          # Choisissez une URL vers laquelle rediriger après la déconnexion
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall

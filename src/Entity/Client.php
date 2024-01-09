@@ -30,13 +30,13 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $mdp = null;
+    private ?string $password = null;
 
     #[ORM\Column(length: 255)]
     private ?string $adresse = null;
 
     #[ORM\Column(length: 5)]
-    private ?string $cp = null;
+    private ?string $code_postal = null;
 
     #[ORM\Column(length: 255)]
     private ?string $ville = null;
@@ -115,12 +115,12 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getPassword(): ?string
     {
-        return $this->mdp;
+        return $this->password;
     }
 
-    public function setMdp(string $mdp): static
+    public function setMdp(string $password): static
     {
-        $this->mdp = $mdp;
+        $this->password = $password;
 
         return $this;
     }
@@ -139,12 +139,12 @@ class Client implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getCp(): ?string
     {
-        return $this->cp;
+        return $this->code_postal;
     }
 
-    public function setCp(string $cp): static
+    public function setCp(string $code_postal): static
     {
-        $this->cp = $cp;
+        $this->code_postal = $code_postal;
 
         return $this;
     }
