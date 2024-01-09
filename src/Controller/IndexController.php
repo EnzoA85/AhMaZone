@@ -18,18 +18,26 @@ class IndexController extends AbstractController
         $produitsRepository = $doctrine->getRepository(Produits::class);
         $produits = $produitsRepository->findAll();
         $listeProduit = [];
-        foreach ($produits as $produit ){
-            $listeProduit[] = array("id"=>$produit->getID(),"libelle" => $produit->getLibelle(),"description"=>$produit->getDescription(),"caracteristique"=>$produit->getCaracteristique(),"prix"=>$produit->getPrixUnitaireTTC(),"quantite"=>$produit->getQuatiteStock(),"img"=>$produit->getImg());
-        }
+        $listeProduitAleatoire = [];
 
         foreach ($produits as $produit) {
             $listeProduit[] = array(
                 "id" => $produit->getID(),
                 "libelle" => $produit->getLibelle(),
+                "description" => $produit->getDescription(),
+                "caracteristique" => $produit->getCaracteristique(),
                 "prix" => $produit->getPrixUnitaireTTC(),
                 "quantite" => $produit->getQuatiteStock(),
                 "img" => $produit->getImg(),
             );
+        }
+
+        // Obtenir 7 indices aléatoires du tableau $listeProduit
+        $indicesAleatoires = array_rand($listeProduit, 9);
+
+        // Remplir $listeProduitAleatoire avec les produits correspondants aux indices aléatoires
+        foreach ($indicesAleatoires as $indice) {
+            $listeProduitAleatoire[] = $listeProduit[$indice];
         }
 
         $panier = $session->get('panier', []);
@@ -37,9 +45,11 @@ class IndexController extends AbstractController
 
         return $this->render('index/index.html.twig', [
             'listeProduit' => $listeProduit,
+            'listeProduitAleatoire' => $listeProduitAleatoire, // Ajout de la variable pour la vue
             'quantiteTotale' => $quantiteTotale,
         ]);
     }
+
 
     #[Route("/image/{id}", name:"show_image")]
     public function showImage(ManagerRegistry $doctrine, int $id): Response

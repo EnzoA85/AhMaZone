@@ -2,15 +2,16 @@
 
 {% block body %}
 	<div class="body">
+		<h2 class='topCommande'>Top commande</h2>
 		<div class="example-wrapper">
 			<div class="card-group" id="slick-carousel">
-				{% for produit in listeProduit %}
-					<a href="{{path('app_produit',{libelle : produit.libelle})}}" style="text-decoration:none;color:black;">
+				{% for produit in listeProduitAleatoire %}
+					<a href="{{ path('app_produit',{libelle : produit.libelle}) }}" style="text-decoration:none;color:black;">
 						<div class="cardProduit">
 							<div class="card-body">
 								<div style="text-align:center;">
 									<center>
-										<img src="{{ path('show_image', {'id': produit.id }) }}" alt="Image" width="250" height="200">
+										<img src="{{ path('show_image', {'id': produit.id }) }}" alt="Image" class="carousel-image">
 										<h5 class="card-title">{{ produit.libelle }}</h5>
 									</center>
 								</div>
@@ -22,34 +23,124 @@
 		</div>
 	</div>
 
+    <div>
+        <center><div class="pub">
+            <img class="slideshow-image" src="{{ asset('images/pub4.png') }}" width="800" height="100">
+            <img class="slideshow-image hidden" src="{{ asset('images/pub5.png') }}" width="800" height="100">
+            {#<img class="slideshow-image hidden" src="{{ asset('images/pub6.png') }}" width="800" height="100">#}
+        </div></center>
+        <div class='listeproduits'>
+            {% for produit in listeProduit %}
+                <div class='produit' style='display:flex;border:solid 2px black; margin-bottom:5px;background-color:white;'>
+                    <img src="{{ path('show_image', {'id': produit.id }) }}" alt="Image" width="100" height="90" style='padding:20px;'>
+                    <h5 class="card-title" style='margin-top:35px;'>{{ produit.libelle }}</h5>
+                    <p style='margin-top:35px;'>{{produit.prix}}
+                        €</p>
+                    <a href="{{ path('app_produit',{libelle : produit.libelle}) }}" style="text-decoration:none;color:black;">
+                        <button type="submit" class="btn btn-warning" style="margin-top:25px;">Voir le produit</button>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
-	<script>
-            // Initialiser le diaporama avec Slick Carousel
-    $(document).ready(function () {
-    $('#slick-carousel').slick({
-    infinite: true,
-    slidesToShow: 6, // Ajustez le nombre de produits affichés à la fois selon vos besoins
-    slidesToScroll: 2,
-    autoplay: true,
-    autoplaySpeed: 2000
-    });
-    });
-	</script>
 	<style>
+		body {
+			background-color: #e3e6e6;
+		}
+		.pub {
+			border: solid black 1px;
+            margin-bottom:20px;
+            margin-right:551px;
+            margin-left:552px;
+		}
+		.produit {
+			justify-content: space-between;
+			background-color: white;
+            margin-right:300px;
+            margin-left:300px;
+		}
+
+		.produit img {
+			padding: 20px;
+		}
+
+		.produit .form-control {
+			width: 70px;
+		}
+
+		.produit .btn {
+			margin-right: 10px;
+		}
+		.topCommande {
+			background-color: #e3e6e6;
+			margin-left: 10px;
+			margin-top: 10px;
+			font-weight: bold;
+		}
 		.cardProduit {
 			margin: 10px;
 			background-color: white;
 		}
+
+		.body {
+			background-color: #e3e6e6;
+		}
+
 		html {
-			overflow: hidden;
-			background-color: #e3e6e6;
+			overflow-x: hidden;
 		}
+
 		.slick-track {
+			height: 200px; /* Adjust the height of the carousel */
 			background-color: #e3e6e6;
 		}
-		.cardProduit {
-			margin: 10px;
-			background-color: white;
+
+		.carousel-image {
+			width: 100px; /* Adjust the width of the images inside the carousel */
+			height: 75px; /* Adjust the height of the images inside the carousel */
 		}
 	</style>
+
+	<script>
+		// Initialiser le diaporama avec Slick Carousel
+$(document).ready(function () {
+$('#slick-carousel').slick({
+infinite: true,
+slidesToShow: 8,
+slidesToScroll: 1,
+autoplay: true,
+autoplaySpeed: 1000
+});
+});
+
+$(document).ready(function () { // Masquer toutes les images sauf la première
+$(".pub .slideshow-image:not(:first)").hide();
+
+// Fonction pour changer d'image toutes les 3 secondes
+function changeImage() { // Ciblez la div pub et trouvez l'image visible
+var currentImage = $(".pub .slideshow-image:visible");
+
+// Masquez l'image actuelle
+currentImage.hide();
+
+// Obtenez l'image suivante
+var nextImage = currentImage.next(".slideshow-image");
+
+// Si la prochaine image n'existe pas (c'est la dernière), revenez à la première image
+if (nextImage.length === 0) {
+nextImage = $(".pub .slideshow-image:first");
+}
+
+// Affichez la prochaine image
+nextImage.show();
+}
+
+// Appelez la fonction toutes les 3 secondes
+setInterval(changeImage, 3000);
+
+// Démarrez le diaporama dès que la page est chargée
+changeImage();
+});
+	</script>
 {% endblock %}
