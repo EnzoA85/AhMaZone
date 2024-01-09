@@ -3,6 +3,7 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+<div style="margin-bottom:25px;">
     <h1>Register</h1>
 
     {{ form_errors(registrationForm) }}
@@ -20,6 +21,7 @@
             label: 'Mot de Passe'
         }) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn btn-primary">Register</button>
     {{ form_end(registrationForm) }}
+</div>
 {% endblock %}
