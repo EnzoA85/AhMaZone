@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="body">
+		<div class="example-wrapper" style="margin-left:3px;">
+			<div class="card-group" id="slick-carousel">
+				{% for produit in listeProduit %}
+					<a href="{{path('app_produit',{libelle : produit.libelle})}}" style="text-decoration:none;color:black;">
+						<div class="cardProduit">
+							<div class="card-body">
+								<div style="text-align:center;">
+									<center>
+										<img src="{{ path('show_image', {'id': produit.id }) }}" alt="Image" width="285" height="245">
+										<h5 class="card-title">{{ produit.libelle }}</h5>
+									</center>
+								</div>
+							</div>
+						</div>
+					</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

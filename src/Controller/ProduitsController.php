@@ -12,8 +12,28 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProduitsController extends AbstractController
 {
     use ControllerTrait;
-    #[Route('/produits/{libelle}', name: 'app_produits')]
-    public function produits($libelle, ManagerRegistry $doctrine,SessionInterface $session): Response
+
+    #[Route('/produits', name: 'app_produits')]
+    public function produits(ManagerRegistry $doctrine,SessionInterface $session): Response
+    {
+        $produitsRepository = $doctrine->getRepository(Produits::class);
+        $produits = $produitsRepository->findAll();
+        $listeProduit = [];
+        foreach ($produits as $produit ){
+            $listeProduit[] = array("id"=>$produit->getID(),"libelle" => $produit->getLibelle(),"description"=>$produit->getDescription(),"caracteristique"=>$produit->getCaracteristique(),"prix"=>$produit->getPrixUnitaireTTC(),"quantite"=>$produit->getQuatiteStock(),"img"=>$produit->getImg());
+        }
+
+        $panier = $session->get('panier', []);
+        $quantiteTotale = $this->getQuantiteTotale($session, $panier);
+
+        return $this->render('produits/produits.html.twig', [
+            'listeProduit' => $listeProduit,
+            'quantiteTotale' => $quantiteTotale,
+        ]);
+    }
+
+    #[Route('/produits/{libelle}', name: 'app_produit')]
+    public function produit($libelle, ManagerRegistry $doctrine,SessionInterface $session): Response
     {
         $produitsRepository = $doctrine->getRepository(Produits::class);
         $leProduit = $produitsRepository->findBy(array('libelle'=>$libelle));

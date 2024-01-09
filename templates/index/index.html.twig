@@ -5,7 +5,7 @@
 		<div class="example-wrapper">
 			<div class="card-group" id="slick-carousel">
 				{% for produit in listeProduit %}
-					<a href="{{path('app_produits',{libelle : produit.libelle})}}" style="text-decoration:none;color:black;">
+					<a href="{{path('app_produit',{libelle : produit.libelle})}}" style="text-decoration:none;color:black;">
 						<div class="cardProduit">
 							<div class="card-body">
 								<div style="text-align:center;">
