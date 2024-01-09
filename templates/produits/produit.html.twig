@@ -1,89 +1,93 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class='produit'>
-    <div class='img'>
-        <img src="{{ path('show_image', {'id': leProduit.0.id }) }}" alt="Image"  width="400" height="350">
-    </div>
-    <div class='prixDescription' style='max-width: 50%;'>
-        <div class='libelle' style="margin-top:10px;">
-            <h1>{{ leProduit.0.libelle }}</h1>
-        </div>
-        <div class='description'>
-            <hr style="border: 1px solid black;">
-            <p>{{leProduit.0.description|raw}}</p>
-        </div> 
-        <div class='caracteristique'>
-            <hr style="border: 1px solid black;">
-            <h4>Caractéristiques</h4>
-            {{leProduit.0.caracteristique|raw}}
-        </div>
-    </div>
-    <div class='prix'>
-        <div style="font-size:20px; padding-top:10px;">Neuf :</div>
-        {{ leProduit.0.prixUnitaireTTC }}€<br/>
-        <div class='livraison'>
-            {% set dateJour = "now"|date("Y-m-d") %}
-            {% set dateJourPlus7 = dateJour|date_modify('+7 days')|date("d/m/Y") %}
-            {% set dateJourPlus14 = dateJour|date_modify('+14 days')|date("d/m/Y") %}
-            <p>Livraison entre le {{dateJourPlus7}} <br/>et le {{dateJourPlus14}}</p>
-            <div style="display:flex;">
-                <div>
-                    <img src="{{ asset('images/localisation.png') }}" width="20" height="20">
-                </div>
-                <div>
-                    <p>2 Bd de Lavoisier, 49000 Angers</p>
-                </div>
-            </div>
-        </div>
-        <div>
-            <input type="number" id="quantite" name="quantite" min="1" max="100" />
-        </div>
-        <div>
-            <center><button class="btn btn-warning" type="button">Ajouter au panier</button></center>
-        </div>
-    </div>
-</div>
+	<div class='produit'>
+		<div class='img'>
+			<img src="{{ path('show_image', {'id': leProduit.0.id }) }}" alt="Image" width="400" height="350">
+		</div>
+		<div class='prixDescription' style='max-width: 50%;'>
+			<div class='libelle' style="margin-top:10px;">
+				<h1>{{ leProduit.0.libelle }}</h1>
+			</div>
+			<div class='description'>
+				<hr style="border: 1px solid black;">
+				<p>{{leProduit.0.description|raw}}</p>
+			</div>
+			<div class='caracteristique'>
+				<hr style="border: 1px solid black;">
+				<h4>Caractéristiques</h4>
+				{{leProduit.0.caracteristique|raw}}
+			</div>
+		</div>
+		<div class='prix'>
+			<div style="font-size:20px; padding-top:10px;">Neuf :</div>
+			{{ leProduit.0.prixUnitaireTTC }}€<br/>
+			<div class='livraison'>
+				{% set dateJour = "now"|date("Y-m-d") %}
+				{% set dateJourPlus7 = dateJour|date_modify('+7 days')|date("d/m/Y") %}
+				{% set dateJourPlus14 = dateJour|date_modify('+14 days')|date("d/m/Y") %}
+				<p>Livraison entre le
+					{{dateJourPlus7}}
+					<br/>et le
+					{{dateJourPlus14}}</p>
+				<div style="display:flex;">
+					<div>
+						<img src="{{ asset('images/localisation.png') }}" width="20" height="20">
+					</div>
+					<div>
+						<p>2 Bd de Lavoisier, 49000 Angers</p>
+					</div>
+				</div>
+			</div>
+			<div>
+				<form method="post" action="{{ path('panier_ajouter', {'id': leProduit.0.id}) }}">
+					<input type="number" name="quantite_{{ leProduit.0.id }}" value="1" min="1" class="form-control" style="width: 70px;">
+					<button type="submit" class="btn btn-warning">Ajouter au panier</button>
+				</form>
+			</div>
+		</div>
+	</div>
 
-<style>
-#quantite {
-    font-size: 10px;
-    margin-left:6px;
-}
-.caracteristique{
-    font-size:10px;
-    text-align:justify;
-}
-.livraison{
-    font-size:10px; 
-    padding-top:10px;
-}
-.description{
-    font-size:15px;
-    text-align:justify;
-}
-.img{
-    margin-top:50px;
-    margin-left:20px;
-}
-.produit {
-    margin-left: 200px;
-    margin-right: 200px;
-    display: flex;
-    font-size:30px;
-    height: 100vh;
-    padding-right:20px;
-    margin-top:20px;
-}
+	<style>
+		#quantite {
+			font-size: 10px;
+			margin-left: 6px;
+		}
+		.caracteristique {
+			font-size: 10px;
+			text-align: justify;
+		}
+		.livraison {
+			font-size: 10px;
+			padding-top: 10px;
+		}
+		.description {
+			font-size: 15px;
+			text-align: justify;
+		}
+		.img {
+			margin-top: 50px;
+			margin-left: 20px;
+            margin-right:20px;
+		}
+		.produit {
+			margin-left: 200px;
+			margin-right: 200px;
+			display: flex;
+			font-size: 30px;
+			height: 100vh;
+			padding-right: 20px;
+			margin-top: 20px;
+		}
 
-.prix {
-    border: solid grey 2px;
-    border-radius: 10px;
-    padding-left:10px;
-    padding-right:10px;
-    margin-top:74px;
-    margin-left:auto;
-    height: 30vh;
-}
-</style>
+		.prix {
+			border: solid grey 2px;
+			border-radius: 10px;
+			padding-left: 10px;
+			padding-right: 10px;
+			margin-top: 74px;
+			margin-left: auto;
+			height: 30vh;
+		}
+	</style>
 {% endblock %}

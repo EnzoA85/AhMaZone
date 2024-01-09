@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block body %}
+    <div class="container my-4">
+        <h1 class="display-4">Mon Panier</h1>
+        {% if panier|length > 0 %}
+            <h2 class="h4 mb-4">Votre Panier</h2>
+
+            <form method="post" action="{{ path('panier_modifier') }}">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Produit</th>
+                        <th scope="col">Prix unitaire</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for id, quantite in panier %}
+                        {% set produit = produits[id] %}
+                        <tr>
+                            <td>
+                                <img src="{{ path('show_image', {'id': produit.id }) }}" alt="{{ produit.libelle }}" width="50" height="50" class="mr-3">
+                                <span class="font-weight-bold">{{ produit.libelle }}</span>
+                            </td>
+                            <td>{{ produit.prixUnitaireTTC }}</td>
+                            <td>
+                                <input type="number" name="quantite_{{ produit.id }}" value="{{ quantite }}" min="1" class="form-control" style="width: 70px;">
+                            </td>
+                            <td>{{ quantite * produit.prixUnitaireTTC }}</td>
+                            <td>
+                                <a href="{{ path('panier_supprimer', {'id': produit.id}) }}" class="btn btn-danger btn-sm">Supprimer</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <button type="submit" class="btn btn-primary">Mettre à jour le panier</button>
+                <a href="{{ path('panier_vider') }}" class="btn btn-danger">Vider le panier</a>
+            </form>
+
+            <p class="font-weight-bold">Total du panier : {{ totalPanier }}</p>
+            <a href="{{ path('app_index') }}" class="btn btn-secondary">Continuer vos achats</a>
+        {% else %}
+            <p class="h5">Votre panier est vide.</p>
+            <a href="{{ path('app_index') }}" class="btn btn-primary">Retour à la page d'accueil</a>
+        {% endif %}
+    </div>
+{% endblock %}

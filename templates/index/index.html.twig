@@ -10,13 +10,14 @@
                             <center>
                                 <img src="{{ path('show_image', {'id': produit.id }) }}" alt="Image"  width="250" height="200">
                                 <h5 class="card-title">{{ produit.libelle }}</h5>
-                            </center>
+                            </center>                            
                         </div>
                     </div>
                 </div></a>
             {% endfor %}
         </div>
     </div>
+
 
     <script>
         // Initialiser le diaporama avec Slick Carousel
@@ -26,11 +27,10 @@
                 slidesToShow: 6,  // Ajustez le nombre de produits affichés à la fois selon vos besoins
                 slidesToScroll: 2,
                 autoplay: true,
-                autoplaySpeed: 2000  // Ajustez la vitesse du diaporama selon vos besoins
+                autoplaySpeed: 2000
             });
         });
     </script>
-
 	<style>
 		.cardProduit {
 			margin: 10px;
@@ -43,5 +43,9 @@
         .slick-track{
             background-color:#e3e6e6;
         }
-	</style>
+        .cardProduit {
+            margin: 10px;
+            background-color: white;
+        }
+    </style>
 {% endblock %}

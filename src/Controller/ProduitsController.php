@@ -6,17 +6,21 @@ use App\Entity\Produits;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProduitsController extends AbstractController
 {
+    use ControllerTrait;
     #[Route('/produits/{libelle}', name: 'app_produits')]
-    public function produits($libelle, ManagerRegistry $doctrine): Response
+    public function produits($libelle, ManagerRegistry $doctrine,SessionInterface $session): Response
     {
         $produitsRepository = $doctrine->getRepository(Produits::class);
         $leProduit = $produitsRepository->findBy(array('libelle'=>$libelle));
+        $panier = $session->get('panier', []);
+        $quantiteTotale = $this->getQuantiteTotale($session, $panier);
         return $this->render('produits/produit.html.twig', [
-            'leProduit' => $leProduit,
+            'leProduit' => $leProduit,'quantiteTotale' => $quantiteTotale,
         ]);
     }
 
