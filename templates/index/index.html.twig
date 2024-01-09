@@ -9,6 +9,10 @@
                         <div style="text-align:center;">
                             <center><img src="{{ asset('images/produits/' ~ produit.img) }}" alt="{{ produit.libelle }}" width="250" height="200"></center>
                             <h5 class="card-title">{{ produit.libelle }}</h5>
+                            <form method="post" action="{{ path('panier_ajouter', {'id': produit.id}) }}">
+                                <input type="number" name="quantite_{{ produit.id }}" value="1" min="1" class="form-control" style="width: 70px;">
+                                <button type="submit" class="btn btn-primary">Ajouter au panier</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -16,23 +20,24 @@
         </div>
     </div>
 
+
     <script>
         // Initialiser le diaporama avec Slick Carousel
         $(document).ready(function(){
             $('#slick-carousel').slick({
                 infinite: true,
-                slidesToShow: 5,  // Ajustez le nombre de produits affichés à la fois selon vos besoins
+                slidesToShow: 5,
                 slidesToScroll: 2,
                 autoplay: true,
-                autoplaySpeed: 2000  // Ajustez la vitesse du diaporama selon vos besoins
+                autoplaySpeed: 2000
             });
         });
     </script>
 
-	<style>
-		.cardProduit {
-			margin: 10px;
-			background-color:lightgrey;
-		}
-	</style>
+    <style>
+        .cardProduit {
+            margin: 10px;
+            background-color: lightgrey;
+        }
+    </style>
 {% endblock %}
