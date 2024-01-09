@@ -32,7 +32,7 @@ class PanierController extends AbstractController
 
         $quantiteTotale = $this->getQuantiteTotale($session, $panier);
 
-        return $this->render('panier/index.html.twig', [
+        return $this->render('panier/panier.html.twig', [
             'panier' => $panier,
             'produits' => $produits,
             'quantiteTotale' => $quantiteTotale,
