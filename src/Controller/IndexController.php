@@ -17,10 +17,27 @@ class IndexController extends AbstractController
         $produits = $produitsRepository->findAll();
         $listeProduit = [];
         foreach ($produits as $produit ){
-            $listeProduit[] = array("libelle" => $produit->getLibelle(),"prix"=>$produit->getPrixUnitaireTTC(),"quantite"=>$produit->getQuatiteStock(),"img"=>$produit->getImg());
+            $listeProduit[] = array("id" => $produit->getId(), "libelle" => $produit->getLibelle(),"prix"=>$produit->getPrixUnitaireTTC(),"quantite"=>$produit->getQuatiteStock(),"img"=>$produit->getImg());
         }     
+        
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController','listeProduit' => $listeProduit,
+        ]);
+    }
+
+    #[Route("/image/{id}", name:"show_image")]
+    public function showImage(ManagerRegistry $doctrine, int $id): Response
+    {
+        $entity = $doctrine->getRepository(Produits::class)->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('L\'entité n\'a pas été trouvée.');
+        }
+
+        $imageData = stream_get_contents($entity->getImg()); // Convertit la ressource en chaîne de caractères
+
+        return new Response($imageData, 200, [
+            'Content-Type' => 'image/png', // Assurez-vous d'ajuster le type MIME en fonction de votre image
         ]);
     }
 }

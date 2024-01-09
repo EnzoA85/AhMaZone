@@ -7,7 +7,7 @@
                 <div class="cardProduit">
                     <div class="card-body">
                         <div style="text-align:center;">
-                            <center><img src="{{ asset('images/produits/' ~ produit.img) }}" alt="{{ produit.libelle }}" width="250" height="200"></center>
+                            <center><img src="{{ path('show_image', {'id': produit.id }) }}" alt="Image"  width="250" height="200"></center>
                             <h5 class="card-title">{{ produit.libelle }}</h5>
                         </div>
                     </div>
