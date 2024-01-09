@@ -24,9 +24,11 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<form class="d-flex" role="search">
-						<input class="me-0" type="search" placeholder="Search" aria-label="Search">
-						<button class="btn" type="submit" style="background-color:#ff9900;"><img src="{{ asset('images/loupe.png')}}" alt="loupe" width="25" height="25"></button>
+					<form class="d-flex" role="search" action="{{ path('search_product', {'query': '__QUERY__'}) }}" method="get" id="searchForm">
+						<input class="me-0" type="search" name="query" placeholder="Search" aria-label="Search">
+						<button class="btn" type="submit" style="background-color:#ff9900;">
+							<img src="{{ asset('images/loupe.png')}}" alt="loupe" width="25" height="25">
+						</button>
 					</form>
 				</ul>
 				<ul class="navbar-nav mb-2 mb-lg-0">
@@ -50,3 +52,14 @@
 		width: 1000px; /* Ajustez la largeur en fonction de vos besoins */
 	}
 </style>
+
+<script>
+    document.getElementById('searchForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Empêche le formulaire de se soumettre normalement
+
+        var query = document.querySelector('input[name="query"]').value;
+        var url = this.action.replace('__QUERY__', encodeURIComponent(query));
+
+        window.location.href = url;
+    });
+</script>

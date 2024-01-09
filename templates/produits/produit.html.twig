@@ -3,25 +3,25 @@
 {% block body %}
 <div class='produit'>
     <div class='img'>
-        <img src="{{ path('show_image', {'id': leProduit.id }) }}" alt="Image"  width="400" height="350">
+        <img src="{{ path('show_image', {'id': leProduit.0.id }) }}" alt="Image"  width="400" height="350">
     </div>
     <div class='prixDescription' style='max-width: 50%;'>
         <div class='libelle' style="margin-top:10px;">
-            <h1>{{ leProduit.libelle }}</h1>
+            <h1>{{ leProduit.0.libelle }}</h1>
         </div>
         <div class='description'>
             <hr style="border: 1px solid black;">
-            <p>{{leProduit.description|raw}}</p>
+            <p>{{leProduit.0.description|raw}}</p>
         </div> 
         <div class='caracteristique'>
             <hr style="border: 1px solid black;">
             <h4>Caractéristiques</h4>
-            {{leProduit.caracteristique|raw}}
+            {{leProduit.0.caracteristique|raw}}
         </div>
     </div>
     <div class='prix'>
         <div style="font-size:20px; padding-top:10px;">Neuf :</div>
-        {{ leProduit.prixUnitaireTTC }}€<br/>
+        {{ leProduit.0.prixUnitaireTTC }}€<br/>
         <div class='livraison'>
             {% set dateJour = "now"|date("Y-m-d") %}
             {% set dateJourPlus7 = dateJour|date_modify('+7 days')|date("d/m/Y") %}

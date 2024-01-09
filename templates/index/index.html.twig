@@ -4,7 +4,7 @@
     <div class="example-wrapper">
         <div class="card-group" id="slick-carousel">
             {% for produit in listeProduit %}
-                <a href="{{path('app_produits',{id : produit.id})}}" style="text-decoration:none;color:black;"><div class="cardProduit">
+                <a href="{{path('app_produits',{libelle : produit.libelle})}}" style="text-decoration:none;color:black;"><div class="cardProduit">
                     <div class="card-body">
                         <div style="text-align:center;">
                             <center>
@@ -23,7 +23,7 @@
         $(document).ready(function(){
             $('#slick-carousel').slick({
                 infinite: true,
-                slidesToShow: 5,  // Ajustez le nombre de produits affichés à la fois selon vos besoins
+                slidesToShow: 6,  // Ajustez le nombre de produits affichés à la fois selon vos besoins
                 slidesToScroll: 2,
                 autoplay: true,
                 autoplaySpeed: 2000  // Ajustez la vitesse du diaporama selon vos besoins
@@ -34,10 +34,14 @@
 	<style>
 		.cardProduit {
 			margin: 10px;
-			background-color:lightgrey;
+            background-color:white;
 		}
         html{
             overflow:hidden;
+            background-color:#e3e6e6;
+        }
+        .slick-track{
+            background-color:#e3e6e6;
         }
 	</style>
 {% endblock %}
