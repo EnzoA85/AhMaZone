@@ -4,15 +4,16 @@
     <div class="example-wrapper">
         <div class="card-group" id="slick-carousel">
             {% for produit in listeProduit %}
-                <div class="cardProduit">
+                <a href="{{path('app_produits',{id : produit.id})}}" style="text-decoration:none;color:black;"><div class="cardProduit">
                     <div class="card-body">
                         <div style="text-align:center;">
-                            <center><a href="{{path('app_produits',{id : produit.id})}}" class="btn btn-primary" style="position: absolute;bottom:0;margin-bottom:20px;">Plus d'infos</a></center>
-                            <center><img src="{{ path('show_image', {'id': produit.id }) }}" alt="Image"  width="250" height="200"></center>
-                            <h5 class="card-title">{{ produit.libelle }}</h5>
+                            <center>
+                                <img src="{{ path('show_image', {'id': produit.id }) }}" alt="Image"  width="250" height="200">
+                                <h5 class="card-title">{{ produit.libelle }}</h5>
+                            </center>
                         </div>
                     </div>
-                </div>
+                </div></a>
             {% endfor %}
         </div>
     </div>
@@ -35,5 +36,8 @@
 			margin: 10px;
 			background-color:lightgrey;
 		}
+        html{
+            overflow:hidden;
+        }
 	</style>
 {% endblock %}

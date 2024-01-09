@@ -15,7 +15,7 @@
         </div> 
         <div class='caracteristique'>
             <hr style="border: 1px solid black;">
-            <h4>Caractéristique</h4>
+            <h4>Caractéristiques</h4>
             {{leProduit.caracteristique|raw}}
         </div>
     </div>
@@ -39,13 +39,17 @@
         <div>
             <input type="number" id="quantite" name="quantite" min="1" max="100" />
         </div>
-        <div style="margin-top:30px;">
+        <div>
             <center><button class="btn btn-warning" type="button">Ajouter au panier</button></center>
         </div>
     </div>
 </div>
 
 <style>
+#quantite {
+    font-size: 10px;
+    margin-left:6px;
+}
 .caracteristique{
     font-size:10px;
     text-align:justify;
