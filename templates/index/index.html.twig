@@ -1,51 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="example-wrapper">
-        <div class="card-group" id="slick-carousel">
-            {% for produit in listeProduit %}
-                <a href="{{path('app_produits',{libelle : produit.libelle})}}" style="text-decoration:none;color:black;"><div class="cardProduit">
-                    <div class="card-body">
-                        <div style="text-align:center;">
-                            <center>
-                                <img src="{{ path('show_image', {'id': produit.id }) }}" alt="Image"  width="250" height="200">
-                                <h5 class="card-title">{{ produit.libelle }}</h5>
-                            </center>                            
-                        </div>
-                    </div>
-                </div></a>
-            {% endfor %}
-        </div>
-    </div>
+	<div class="body">
+		<div class="example-wrapper">
+			<div class="card-group" id="slick-carousel">
+				{% for produit in listeProduit %}
+					<a href="{{path('app_produits',{libelle : produit.libelle})}}" style="text-decoration:none;color:black;">
+						<div class="cardProduit">
+							<div class="card-body">
+								<div style="text-align:center;">
+									<center>
+										<img src="{{ path('show_image', {'id': produit.id }) }}" alt="Image" width="250" height="200">
+										<h5 class="card-title">{{ produit.libelle }}</h5>
+									</center>
+								</div>
+							</div>
+						</div>
+					</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
 
 
-    <script>
-        // Initialiser le diaporama avec Slick Carousel
-        $(document).ready(function(){
-            $('#slick-carousel').slick({
-                infinite: true,
-                slidesToShow: 6,  // Ajustez le nombre de produits affichés à la fois selon vos besoins
-                slidesToScroll: 2,
-                autoplay: true,
-                autoplaySpeed: 2000
-            });
-        });
-    </script>
+	<script>
+            // Initialiser le diaporama avec Slick Carousel
+    $(document).ready(function () {
+    $('#slick-carousel').slick({
+    infinite: true,
+    slidesToShow: 6, // Ajustez le nombre de produits affichés à la fois selon vos besoins
+    slidesToScroll: 2,
+    autoplay: true,
+    autoplaySpeed: 2000
+    });
+    });
+	</script>
 	<style>
 		.cardProduit {
 			margin: 10px;
-            background-color:white;
+			background-color: white;
 		}
-        html{
-            overflow:hidden;
-            background-color:#e3e6e6;
-        }
-        .slick-track{
-            background-color:#e3e6e6;
-        }
-        .cardProduit {
-            margin: 10px;
-            background-color: white;
-        }
-    </style>
+		html {
+			overflow: hidden;
+			background-color: #e3e6e6;
+		}
+		.slick-track {
+			background-color: #e3e6e6;
+		}
+		.cardProduit {
+			margin: 10px;
+			background-color: white;
+		}
+	</style>
 {% endblock %}

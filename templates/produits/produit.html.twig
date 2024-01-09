@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div style="display:flex">
+	<div class="pub">
+		<img class="slideshow-image" src="{{ asset('images/pub1.png') }}">
+		<img class="slideshow-image hidden" src="{{ asset('images/pub2.png') }}">
+		<img class="slideshow-image hidden" src="{{ asset('images/pub3.png') }}">
+	</div>
 	<div class='produit'>
 		<div class='img'>
 			<img src="{{ path('show_image', {'id': leProduit.0.id }) }}" alt="Image" width="400" height="350">
@@ -47,8 +53,47 @@
 			</div>
 		</div>
 	</div>
+</div>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Masquer toutes les images sauf la première
+            $(".pub .slideshow-image:not(:first)").hide();
 
+            // Fonction pour changer d'image toutes les 3 secondes
+            function changeImage() {
+                // Ciblez la div pub et trouvez l'image visible
+                var currentImage = $(".pub .slideshow-image:visible");
+
+                // Masquez l'image actuelle
+                currentImage.hide();
+
+                // Obtenez l'image suivante
+                var nextImage = currentImage.next(".slideshow-image");
+
+                // Si la prochaine image n'existe pas (c'est la dernière), revenez à la première image
+                if (nextImage.length === 0) {
+                    nextImage = $(".pub .slideshow-image:first");
+                }
+
+                // Affichez la prochaine image
+                nextImage.show();
+            }
+
+            // Appelez la fonction toutes les 3 secondes
+            setInterval(changeImage, 3000);
+
+            // Démarrez le diaporama dès que la page est chargée
+            changeImage();
+        });
+    </script>
 	<style>
+		.pub{
+			margin-left:25px;
+			margin-top:100px;
+			border: solid black 1px;
+			margin-bottom:350px;
+		}
 		#quantite {
 			font-size: 10px;
 			margin-left: 6px;
@@ -71,7 +116,7 @@
             margin-right:20px;
 		}
 		.produit {
-			margin-left: 200px;
+			margin-left: 50px;
 			margin-right: 200px;
 			display: flex;
 			font-size: 30px;
