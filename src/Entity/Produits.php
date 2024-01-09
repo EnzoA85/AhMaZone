@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProduitsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\resource;
 
 #[ORM\Entity(repositoryClass: ProduitsRepository::class)]
 class Produits
@@ -28,8 +29,8 @@ class Produits
     #[ORM\Column(name: "quatiteStock")]
     private ?int $quatiteStock = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $img = null;
+    #[ORM\Column(type: 'blob', nullable: true)]
+    private $img = null;
 
     public function getId(): ?int
     {
@@ -96,15 +97,10 @@ class Produits
         return $this;
     }
 
-    public function getImg(): ?string
+    public function getImg()
     {
         return $this->img;
     }
 
-    public function setImg(string $img): static
-    {
-        $this->img = $img;
 
-        return $this;
-    }
 }

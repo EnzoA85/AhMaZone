@@ -3,7 +3,7 @@
 {% block body %}
 <div class='produit'>
     <div class='img'>
-        <img src="{{ asset('images/produits/' ~ leProduit.img) }}" alt="{{ leProduit.libelle }}" width="500" height="400">
+        <img src="{{ path('show_image', {'id': leProduit.id }) }}" alt="Image"  width="400" height="350">
     </div>
     <div class='prixDescription' style='max-width: 50%;'>
         <div class='libelle' style="margin-top:10px;">
@@ -35,6 +35,9 @@
                     <p>2 Bd de Lavoisier, 49000 Angers</p>
                 </div>
             </div>
+        </div>
+        <div>
+            <input type="number" id="quantite" name="quantite" min="1" max="100" />
         </div>
         <div style="margin-top:30px;">
             <center><button class="btn btn-warning" type="button">Ajouter au panier</button></center>
