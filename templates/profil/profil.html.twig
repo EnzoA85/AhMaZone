@@ -2,26 +2,53 @@
 
 
 {% block body %}
-	<center><h1 style='margin-top:10px;'>Bienvenue {{client.nom}} {{client.prenom}}</h1></center>
+	<center>
+		<h1 style='margin-top:10px;'>Bienvenue
+			{{client.nom}}
+			{{client.prenom}}</h1>
+	</center>
 	<div class='profil'>
 		<div class='edition'>
 			<h3>Profil</h3>
-            <p><a href="{{ path('app_profilEdit', {'section': 'password'}) }}">Changer le mot de passe</a></p>
-            <p><a href="{{ path('app_profilEdit', {'section': 'email'}) }}">Changer de mail</a></p>
-            <p><a href="{{ path('app_profilEdit', {'section': 'name'}) }}">Changer le nom/prénom</a></p>
+			<p>
+				<a href="{{ path('app_profilEdit', {'section': 'password'}) }}">Changer le mot de passe</a>
+			</p>
+			<p>
+				<a href="{{ path('app_profilEdit', {'section': 'email'}) }}">Changer de mail</a>
+			</p>
+			<p>
+				<a href="{{ path('app_profilEdit', {'section': 'name'}) }}">Changer le nom/prénom</a>
+			</p>
 			<a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">
 				<button type="submit" class="btn btn-danger" style="margin-top:25px;">Deconnexion</button>
 			</a>
 		</div>
 		<div class='commandes'>
 			<h2>Mes Commandes</h2>
+			{% for commande in listeCommande %}
+				<a href="{{path('app_commande',{id : commande.id})}}" style="text-decoration:none;color:black;">
+					<div class='commande'>
+						Prix :
+						{{commande.prixTotal}}
+						€<br/>
+						Date de la commande :
+						{{ commande.date|date('d/m/Y') }}<br/>
+					</div>
+				</a>
+			{% endfor %}
 		</div>
 	</div>
 
 	<style>
+		.commande {
+			border: 1px solid black;
+			margin-bottom:10px;
+			border-radius: 10px;
+			padding:5px;
+		}
 		.profil {
 			text-align: center;
-            display: flex;
+			display: flex;
 			justify-content: center;
 			margin: 0;
 		}
@@ -31,7 +58,7 @@
 			border: 1px solid #ccc;
 			padding: 20px;
 			margin: 10px;
-            border-radius: 10px;
+			border-radius: 10px;
 		}
 	</style>
 {% endblock %}
