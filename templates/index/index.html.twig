@@ -1,6 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+	{% if app.session.get('panier_valide') %}
+		<script>
+			Swal.fire({
+				icon: 'success',
+				title: 'Succès',
+				text: 'Le panier a été validé avec succès !',
+				confirmButtonText: 'OK',
+				background: '#232F3E',
+				iconColor: '#FF9900',
+				confirmButtonColor: '#146EB4'
+			});
+		</script>
+		{% do app.session.remove('panier_valide') %}
+	{% endif %}
+
+
 	<div class="body">
 		<h2 class='topCommande'>Top commande</h2>
 		<div class="example-wrapper">
