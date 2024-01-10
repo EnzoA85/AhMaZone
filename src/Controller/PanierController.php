@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Entity\Produits;
+use App\Entity\Commande;
+use App\Entity\Acheter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -98,6 +100,44 @@ class PanierController extends AbstractController
 
         return $this->redirectToRoute('app_panier');
     }
+
+    #[Route('/panier/valider', name: 'panier_valider')]
+    public function validerPanier(SessionInterface $session, EntityManagerInterface $entityManager): Response
+    {
+        $panier = $session->get('panier', []);
+        $prixTotalTTC = 0;
+
+        $commande = new Commande();
+        $commande->setDate(new \DateTime());
+        $commande->setClient($this->getUser());
+
+        foreach($panier as $id => $quantite) {
+            $produit = $entityManager->getRepository(Produits::class)->find($id);
+            if($produit) {
+                $prixTotalTTC += $produit->getPrixUnitaireTTC() * $quantite;
+
+                $acheter = new Acheter();
+                $acheter->setProduit($produit);
+                $acheter->setCommande($commande);
+                $acheter->setQuantite($quantite);
+
+                $entityManager->persist($acheter);
+            }
+        }
+
+        $commande->setPrixTotalTTC($prixTotalTTC);
+        $entityManager->persist($commande);
+        $entityManager->flush();
+
+        $session->set('panier_valide', true);
+
+        $session->remove('panier');
+
+        return $this->redirectToRoute('app_index');
+}
+
+
+
 
     #[Route('/panier/vider', name: 'panier_vider')]
     public function viderPanier(SessionInterface $session): RedirectResponse

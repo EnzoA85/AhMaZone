@@ -46,6 +46,11 @@
 
             <p class="font-weight-bold">Total du panier : {{ totalPanier }}</p>
             <a href="{{ path('app_index') }}" class="btn btn-secondary">Continuer vos achats</a>
+            {% if app.user %}
+                <a href="{{ path('panier_valider') }}" class="btn btn-success">Valider la commande</a>
+            {% else %}
+                <a href="{{ path('app_login') }}" class="btn btn-primary">Se connecter</a>
+            {% endif %}
         {% else %}
             <p class="h5">Votre panier est vide.</p>
             <a href="{{ path('app_index') }}" class="btn btn-primary">Retour à la page d'accueil</a>
