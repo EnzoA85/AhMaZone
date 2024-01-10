@@ -35,7 +35,9 @@
 				<p>Livraison entre le
 					{{dateJourPlus7}}
 					<br/>et le
-					{{dateJourPlus14}}</p>
+					{{dateJourPlus14}}<br/><br/>
+					Disponible en stock : {{leProduit.0.quatiteStock}}
+				</p>
 				<div style="display:flex;">
 					<div>
 						<img src="{{ asset('images/localisation.png') }}" width="20" height="20">
@@ -131,7 +133,7 @@
 			padding-right: 10px;
 			margin-top: 74px;
 			margin-left: auto;
-			height: 30vh;
+			height: 33vh;
 		}
 	</style>
 {% endblock %}

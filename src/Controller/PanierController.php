@@ -113,6 +113,9 @@ class PanierController extends AbstractController
 
         foreach($panier as $id => $quantite) {
             $produit = $entityManager->getRepository(Produits::class)->find($id);
+            $newQuantiteStock = $produit->getquatiteStock() - 1;
+            $produit->setQuatiteStock($newQuantiteStock);
+            $entityManager->flush();
             if($produit) {
                 $prixTotalTTC += $produit->getPrixUnitaireTTC() * $quantite;
 
@@ -134,10 +137,7 @@ class PanierController extends AbstractController
         $session->remove('panier');
 
         return $this->redirectToRoute('app_index');
-}
-
-
-
+    }
 
     #[Route('/panier/vider', name: 'panier_vider')]
     public function viderPanier(SessionInterface $session): RedirectResponse
