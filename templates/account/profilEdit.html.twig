@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <h1>Modifier le compte</h1>
+
+    {% if section == 'password' %}
+        {# Formulaire de modification de mot de passe #}
+        {{ render(controller('App\\Controller\\AccountController::changePasswordForm')) }}
+    {% elseif section == 'email' %}
+        {# Formulaire de modification d'email #}
+        {{ render(controller('App\\Controller\\AccountController::changeEmailForm')) }}
+    {% elseif section == 'name' %}
+        {# Formulaire de modification de nom/prénom #}
+        {{ render(controller('App\\Controller\\AccountController::changeNameForm')) }}
+    {% else %}
+        <p>Section non reconnue</p>
+    {% endif %}
+{% endblock %}

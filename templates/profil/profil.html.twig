@@ -2,10 +2,13 @@
 
 
 {% block body %}
+	<center><h1 style='margin-top:10px;'>Bienvenue {{client.nom}} {{client.prenom}}</h1></center>
 	<div class='profil'>
 		<div class='edition'>
 			<h3>Profil</h3>
-            <h4></h4>
+            <p><a href="{{ path('app_profilEdit', {'section': 'password'}) }}">Changer le mot de passe</a></p>
+            <p><a href="{{ path('app_profilEdit', {'section': 'email'}) }}">Changer de mail</a></p>
+            <p><a href="{{ path('app_profilEdit', {'section': 'name'}) }}">Changer le nom/prénom</a></p>
 			<a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">
 				<button type="submit" class="btn btn-danger" style="margin-top:25px;">Deconnexion</button>
 			</a>
