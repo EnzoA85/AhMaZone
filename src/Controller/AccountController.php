@@ -24,11 +24,7 @@ class AccountController extends AbstractController
         ]);
     }
 
-    // Dans le même contrôleur, ajoutez ces actions
-
-    /**
-     * @Route("/account/change-password", name="account_change_password")
-     */
+    #[Route('/account/change-password',name:"account_change_password")]
     public function changePasswordForm(SessionInterface $session): Response
     {
         $panier = $session->get('panier', []);
@@ -37,9 +33,7 @@ class AccountController extends AbstractController
         return $this->render('account/_change_password_form.html.twig',['quantiteTotale' => $quantiteTotale,'form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/account/change-email", name="account_change_email")
-     */
+    #[Route('/account/change-email',name:"account_change_email")]
     public function changeEmailForm(SessionInterface $session): Response
     {
         $panier = $session->get('panier', []);
@@ -48,9 +42,7 @@ class AccountController extends AbstractController
         return $this->render('account/_change_email_form.html.twig',['quantiteTotale' => $quantiteTotale,'form' => $form->createView()]);
     }
 
-    /**
-     * @Route("/account/change-name", name="account_change_name")
-     */
+    #[Route('/account/change-name',name:"account_change_name")]
     public function changeNameForm(SessionInterface $session): Response
     {
         $panier = $session->get('panier', []);
