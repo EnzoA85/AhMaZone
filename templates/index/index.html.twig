@@ -22,8 +22,6 @@
 			</div>
 		</div>
 	</div>
-
-    <div>
         <center><div class="pub">
             <img class="slideshow-image" src="{{ asset('images/pub4.png') }}" width="800" height="100">
             <img class="slideshow-image hidden" src="{{ asset('images/pub5.png') }}" width="800" height="100">
@@ -36,6 +34,16 @@
                     <h5 class="card-title" style='margin-top:35px;'>{{ produit.libelle }}</h5>
                     <p style='margin-top:35px;'>{{produit.prix}}
                         €</p>
+					{# Affichage de la notation par étoiles #}
+					<div style='margin-top:35px;'>
+						{% for i in 1..5 %}
+							{% if i <= produit.notation %}
+								★ {# Étoile pleine #}
+							{% else %}
+								☆ {# Étoile vide #}
+							{% endif %}
+						{% endfor %}
+					</div>
                     <a href="{{ path('app_produit',{libelle : produit.libelle}) }}" style="text-decoration:none;color:black;">
                         <button type="submit" class="btn btn-warning" style="margin-top:25px;">Voir le produit</button>
                     </a>

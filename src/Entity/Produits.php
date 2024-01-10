@@ -17,10 +17,10 @@ class Produits
     #[ORM\Column(length: 255)]
     private ?string $libelle = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 2000)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 2000)]
     private ?string $caracteristique = null;
 
     #[ORM\Column(name: "prixUnitaireTTC")]
@@ -31,6 +31,9 @@ class Produits
 
     #[ORM\Column(type: 'blob', nullable: true)]
     private $img = null;
+
+    #[ORM\Column(type: 'float')]
+    private ?float $notation = null;
 
     public function getId(): ?int
     {
@@ -102,5 +105,15 @@ class Produits
         return $this->img;
     }
 
+    public function getNotation(): ?float
+    {
+        return $this->notation;
+    }
 
+    public function setNotation(float $notation): static
+    {
+        $this->notation = $notation;
+
+        return $this;
+    }
 }
