@@ -48,10 +48,17 @@
 				</div>
 			</div>
 			<div>
+				{% if leProduit.0.quatiteStock != 0 %}
 				<form method="post" action="{{ path('panier_ajouter', {'id': leProduit.0.id}) }}">
 					<input type="number" name="quantite_{{ leProduit.0.id }}" value="1" min="1" class="form-control" style="width: 70px;">
 					<button type="submit" class="btn btn-warning">Ajouter au panier</button>
 				</form>
+				{% endif %}
+				{% if leProduit.0.quatiteStock == 0 %}
+				<form method="post" action="{{ path('panier_ajouter', {'id': leProduit.0.id}) }}">
+					<button type="submit" class="btn btn-danger" disabled>Sold Out</button>
+				</form>
+				{% endif %}
 			</div>
 		</div>
 	</div>
