@@ -62,7 +62,7 @@
 		</div>
 	</nav>
 
-	<body>
+	<body class="main-container">
 		{% block body %}{% endblock %}
 	</body>
 	<footer>
@@ -97,6 +97,26 @@
 </html>
 
 <style>
+	body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-container {
+    flex-grow: 1;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    margin-top: auto; /* Cette propriété garantit que le footer est toujours en bas de la page */
+}
 	.navbar-nav form input {
 		width: 1000px; /* Ajustez la largeur en fonction de vos besoins */
 	}
