@@ -29,6 +29,7 @@ class IndexController extends AbstractController
                 "prix" => $produit->getPrixUnitaireTTC(),
                 "quantite" => $produit->getQuatiteStock(),
                 "img" => $produit->getImg(),
+                "notation" => $produit->getNotation(),
             );
         }
 
