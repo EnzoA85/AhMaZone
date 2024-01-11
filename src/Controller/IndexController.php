@@ -33,13 +33,11 @@ class IndexController extends AbstractController
             );
         }
 
-        // Obtenir 7 indices aléatoires du tableau $listeProduit
-        $indicesAleatoires = array_rand($listeProduit, 9);
-
-        // Remplir $listeProduitAleatoire avec les produits correspondants aux indices aléatoires
-        foreach ($indicesAleatoires as $indice) {
-            $listeProduitAleatoire[] = $listeProduit[$indice];
-        }
+        usort($listeProduit, function ($a, $b) {
+            return $b['notation'] <=> $a['notation'];
+        });
+    
+        $listeProduitAleatoire = array_slice($listeProduit, 0, 9);
 
         $panier = $session->get('panier', []);
         $quantiteTotale = $this->getQuantiteTotale($session, $panier);
