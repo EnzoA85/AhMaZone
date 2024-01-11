@@ -19,6 +19,11 @@
 			<p>
 				<a href="{{ path('app_profilEdit', {'section': 'name'}) }}">Changer le nom/prénom</a>
 			</p>
+			{% if client.nom == 'admin' %}
+				<a class="nav-link active" aria-current="page" href="{{ path('app_admin') }}">
+					<button type="submit" class="btn btn-info" style="margin-top:25px; color:white;">Admin</button>
+				</a>
+			{% endif %}
 			<a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">
 				<button type="submit" class="btn btn-danger" style="margin-top:25px;">Deconnexion</button>
 			</a>
@@ -50,7 +55,6 @@
 			text-align: center;
 			display: flex;
 			justify-content: center;
-			margin: 0;
 		}
 
 		.edition,

@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+    {% for client in listeClient %}
+    <div class='client'>
+        <h3>Client {{client.nom}} {{client.prenom}}</h3>
+        Nom : {{client.nom}} <br/>
+        Prenom : {{client.prenom}} <br/>
+        Mail : {{client.email}} <br/>
+        Adresse : {{client.adresse}}, {{client.ville}} - {{client.CP}}
+    </div><br/>
+    {% endfor %}
+
+    <style>
+    .client{
+        border: solid #ccc 2px;
+        border-radius:10px;
+        margin-right:700px;
+        margin-left:700px;
+        margin-top:20px;
+        padding:10px;
+    }
+    </style>
+
+{% endblock %}
