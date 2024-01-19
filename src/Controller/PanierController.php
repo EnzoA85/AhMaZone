@@ -113,9 +113,9 @@ class PanierController extends AbstractController
 
         foreach($panier as $id => $quantite) {
             $produit = $entityManager->getRepository(Produits::class)->find($id);
-            $newQuantiteStock = $produit->getquatiteStock() - 1;
-            $produit->setQuatiteStock($newQuantiteStock);
-            $entityManager->flush();
+            //$newQuantiteStock = $produit->getquatiteStock() - 1;
+            //$produit->setQuatiteStock($newQuantiteStock);
+            //$entityManager->flush();
             if($produit) {
                 $prixTotalTTC += $produit->getPrixUnitaireTTC() * $quantite;
 
